@@ -1,3 +1,7 @@
+import {
+  campaignInputSchema,
+  type CampaignInput,
+} from "@/features/campaigns/application/create-campaign";
 import { z } from "zod";
 import fixtures from "@/features/campaigns/infrastructure/fixtures.json";
 import type { Campaign } from "@/features/campaigns/domain/campaign";
@@ -77,6 +81,8 @@ export const initialState: DemoState = {
   saved: [],
 };
 export type DemoAction =
+  | { type: "createCampaign"; input: CampaignInput; id: string }
+  | { type: "reviewCampaign"; id: string; approve: boolean }
   | { type: "hydrate"; state: DemoState }
   | { type: "save"; id: string }
   | { type: "createDonation"; donation: Donation }
@@ -84,6 +90,55 @@ export type DemoAction =
   | { type: "reset" };
 export function demoReducer(state: DemoState, action: DemoAction): DemoState {
   switch (action.type) {
+    case "createCampaign": {
+      const result = campaignInputSchema.safeParse(action.input);
+      if (
+        !result.success ||
+        !action.id ||
+        state.campaigns.some((c) => c.id === action.id)
+      )
+        return state;
+      const i = result.data;
+      return {
+        ...state,
+        campaigns: [
+          {
+            id: action.id,
+            title: i.title,
+            category: i.category,
+            target: i.target,
+            daysLeft: i.days,
+            location: i.location,
+            image: i.image,
+            story: i.story.split(/\n+/).filter(Boolean),
+            organizer: "Aulia Rahman",
+            verified: false,
+            status: "review",
+            mine: true,
+            raised: 0,
+            donors: 0,
+            updates: [],
+            supporters: [],
+            submittedAt: "Baru saja",
+          },
+          ...state.campaigns,
+        ],
+      };
+    }
+    case "reviewCampaign":
+      return {
+        ...state,
+        campaigns: state.campaigns.map((c) =>
+          c.id === action.id && c.status === "review"
+            ? {
+                ...c,
+                status: action.approve ? "active" : "rejected",
+                verified: action.approve,
+              }
+            : c,
+        ),
+      };
+
     case "hydrate":
       return action.state;
     case "reset":

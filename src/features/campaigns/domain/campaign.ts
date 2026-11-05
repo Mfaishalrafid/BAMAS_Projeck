@@ -1,4 +1,5 @@
 export interface Campaign {
+  mine?: boolean;
   id: string;
   title: string;
   category: string;

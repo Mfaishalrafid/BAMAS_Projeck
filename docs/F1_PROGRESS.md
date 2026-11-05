@@ -18,3 +18,7 @@ Beranda, Jelajah (query/kategori/urut), Detail (cerita/kabar/doa, simpan, bagika
 ## PR-3
 Donasi 3 tahap, metode demo, pembayaran eksplisit SIMULASI, success, riwayat/filter dan pembatalan. Nominal sesuai batas referensi; idempotensi dan larangan membayar transaksi cancelled ditangani reducer murni. Penyimpanan `bamas-f1-simulation-v1` tervalidasi Zod, tidak membaca key prototype lama; kegagalan storage diberi pesan. Kode SIM bukan QR/rekening valid, perubahan disengaja untuk menghindari pembayaran nyata.
 PASS: lint, typecheck, 5 unit tests, production build, E2E Chromium pembayaran→reload→riwayat→pembatalan. Percobaan E2E awal gagal karena dev origin, selector ambigu dan indikator dev menutupi navigasi; suite sekarang memakai production server lokal port 3001 dan selector scoped, lalu lulus. Ini bukan deployment.
+
+## PR-4
+Galang dana 4 tahap dengan validasi, foto fixture, review dan persetujuan; kampanye saya; profil, simpanan dan reset terkonfirmasi; dashboard admin demo dengan KPI, grafik ilustrasi dan approve/reject. Kampanye review/rejected tidak muncul di Jelajah. Moderasi hanya transisi review→active/rejected, bukan otorisasi produksi. Tidak menjanjikan verifikasi nyata 1×24 jam seperti teks prototype; diganti penjelasan SIMULASI. Grafik diberi label ilustrasi, bukan analytics aktual.
+PASS PR-4: lint, typecheck, 6 unit tests, production build, 2 E2E Chromium (donasi dan pengajuan→moderasi→reload→reset). RBAC/auth production NOT RUN karena F2 belum diimplementasikan.
