@@ -14,3 +14,7 @@ PR-1 validasi lokal: PASS lint (tanpa warning), typecheck, unit (1 tes), product
 
 ## PR-2
 Beranda, Jelajah (query/kategori/urut), Detail (cerita/kabar/doa, simpan, bagikan), shell responsive dengan frame 414×868, font lokal dan fixture asli direkonstruksi ke komponen TSX; tidak menggunakan runtime bundle vendor. PASS smoke Chromium: pencarian Garut menghasilkan satu kampanye aktif dan membuka detail yang benar. Screenshot referensi/migrasi 390×844 dan 1440×1000 diperiksa; struktur, warna dan frame dipertahankan. Parity belum pixel-identical: ikon, panel desktop, spacing dan animasi perlu penyempurnaan PR-5. Link layar PR-3/4 masih placeholder hingga PR berikutnya. Gambar memakai URL Unsplash asli; izin produksi belum diverifikasi.
+
+## PR-3
+Donasi 3 tahap, metode demo, pembayaran eksplisit SIMULASI, success, riwayat/filter dan pembatalan. Nominal sesuai batas referensi; idempotensi dan larangan membayar transaksi cancelled ditangani reducer murni. Penyimpanan `bamas-f1-simulation-v1` tervalidasi Zod, tidak membaca key prototype lama; kegagalan storage diberi pesan. Kode SIM bukan QR/rekening valid, perubahan disengaja untuk menghindari pembayaran nyata.
+PASS: lint, typecheck, 5 unit tests, production build, E2E Chromium pembayaran→reload→riwayat→pembatalan. Percobaan E2E awal gagal karena dev origin, selector ambigu dan indikator dev menutupi navigasi; suite sekarang memakai production server lokal port 3001 dan selector scoped, lalu lulus. Ini bukan deployment.

@@ -816,3 +816,213 @@ h3 {
 .home-header .icon-button {
   border: 1px solid var(--color-border);
 }
+.page-title {
+  font-size: 26px;
+  font-weight: 600;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 20px 0 8px;
+}
+.field input,
+.field textarea,
+.field select {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  min-height: 48px;
+  padding: 12px;
+  background: var(--color-canvas);
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 100%;
+}
+.field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+.check-field {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  margin: 24px 0;
+}
+.check-field input,
+.method input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-ink);
+  flex-shrink: 0;
+}
+.steps {
+  display: flex;
+  gap: 6px;
+  padding: 12px 0 20px;
+  list-style: none;
+}
+.steps li {
+  flex: 1;
+  border-top: 4px solid var(--color-border);
+  padding-top: 6px;
+  font-size: 11px;
+}
+.steps li.active {
+  border-color: var(--color-ink);
+  font-weight: 600;
+}
+.campaign-summary {
+  padding: 14px;
+  background: var(--color-surface);
+  border-radius: 16px;
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+.campaign-summary b {
+  display: block;
+  margin-top: 6px;
+}
+.amount-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+.amount-options button {
+  border: 1px solid var(--color-border);
+  padding: 12px 4px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.amount-options [aria-pressed="true"] {
+  background: var(--color-lime);
+  border: 2px solid var(--color-ink);
+}
+.error {
+  color: var(--color-error);
+  font-size: 13px;
+  margin: 12px 0;
+}
+.method-group {
+  margin-top: 24px;
+}
+.method-group legend {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.method {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  margin: 8px 0;
+  font-size: 12px;
+}
+.method > span {
+  background: var(--color-lilac-soft);
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  min-width: 46px;
+  text-align: center;
+}
+.method > b {
+  flex: 1;
+}
+.method:has(input:checked) {
+  outline: 2px solid var(--color-ink);
+}
+.summary {
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+.summary > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--color-border);
+}
+.summary dd {
+  text-align: right;
+  font-weight: 600;
+}
+.summary > div:last-child {
+  background: var(--color-lime);
+}
+.payment-amount {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  margin: 20px 0;
+}
+.demo-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  background: var(--color-lilac-soft);
+  border-radius: 24px;
+  margin: 24px 0;
+  gap: 12px;
+  text-align: center;
+}
+.demo-code > b {
+  font-size: 48px;
+  letter-spacing: 8px;
+}
+.demo-code p {
+  font-size: 12px;
+}
+.full {
+  width: 100%;
+  margin-top: 12px;
+}
+.success {
+  text-align: center;
+}
+.success h1 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.success > p {
+  margin-top: 16px;
+}
+.success-mark {
+  display: grid;
+  place-items: center;
+  background: var(--color-lime);
+  border-radius: 50%;
+  width: 96px;
+  height: 96px;
+  margin: 32px auto;
+  font-size: 48px;
+}
+.history-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.history-item > span {
+  font-size: 13px;
+}
+.history-item > small {
+  color: var(--color-text-secondary);
+}
