@@ -15,6 +15,12 @@ import {
 } from "@/features/donations/presentation/donation-screens";
 import { useDemo } from "@/features/demo/application/use-demo";
 import type { DonationInput } from "@/features/donations/domain/donation";
+import { CreateScreen } from "@/features/campaigns/presentation/create-screen";
+import { AdminScreen } from "@/features/admin/presentation/admin-screen";
+import {
+  ProfileScreen,
+  MyCampaignsScreen,
+} from "@/features/profile/presentation/profile-screen";
 type Screen = { name: string; id?: string };
 export default function BamasApp() {
   const [stack, setStack] = useState<Screen[]>([{ name: "home" }]);
@@ -46,10 +52,7 @@ export default function BamasApp() {
     if (id) {
       // Read the share link after hydration, keeping server/client initial markup identical.
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setStack([
-        { name: "home" },
-        { name: "detail", id },
-      ]);
+      setStack([{ name: "home" }, { name: "detail", id }]);
     }
   }, []);
   const createDonation = (input: DonationInput) => {
@@ -68,6 +71,54 @@ export default function BamasApp() {
   };
   let content: React.ReactNode;
   switch (current.name) {
+    case "create":
+      content = (
+        <CreateScreen
+          back={back}
+          submit={(input) => {
+            dispatch({
+              type: "createCampaign",
+              input,
+              id: `campaign-${crypto.randomUUID()}`,
+            });
+            setStack([{ name: "profile" }, { name: "myCampaigns" }]);
+          }}
+        />
+      );
+      break;
+    case "admin":
+      content = (
+        <AdminScreen
+          campaigns={state.campaigns}
+          donations={state.donations}
+          back={back}
+          review={(id, approve) =>
+            dispatch({ type: "reviewCampaign", id, approve })
+          }
+        />
+      );
+      break;
+    case "profile":
+      content = (
+        <ProfileScreen
+          campaigns={state.campaigns}
+          donations={state.donations}
+          saved={state.saved}
+          navigate={navigate}
+          reset={() => dispatch({ type: "reset" })}
+        />
+      );
+      break;
+    case "myCampaigns":
+      content = (
+        <MyCampaignsScreen
+          campaigns={state.campaigns}
+          navigate={navigate}
+          back={back}
+        />
+      );
+      break;
+
     case "home":
       content = <HomeScreen campaigns={state.campaigns} navigate={navigate} />;
       break;
