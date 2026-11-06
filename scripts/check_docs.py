@@ -5,7 +5,7 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 errors = []
 for path in root.rglob('*.md'):
-    if '.git' in path.parts:
+    if any(part in {'.git', 'node_modules', '.next', 'playwright-report', 'test-results'} for part in path.parts):
         continue
     for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', path.read_text()):
         if '://' in target or target.startswith('#'):

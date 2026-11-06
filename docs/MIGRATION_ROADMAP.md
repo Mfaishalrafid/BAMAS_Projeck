@@ -1,6 +1,6 @@
 # Roadmap migrasi
 
-Setiap PR memerlukan review; jangan merge otomatis. Hanya PR-0 diotorisasi saat handover.
+Setiap PR memerlukan review; jangan merge otomatis. PR-1 sampai PR-5 untuk F1 telah diotorisasi pemilik pada 2026-11-05; F2–F5 belum diotorisasi.
 
 | Fase / PR | Hasil | Gate penerimaan |
 | --- | --- | --- |

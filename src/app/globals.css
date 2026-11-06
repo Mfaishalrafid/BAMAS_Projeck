@@ -1,0 +1,5 @@
+@import "tailwindcss";
+:root { color-scheme: light; }
+body { margin: 0; background: #fdfbfc; color: #211b20; font-family: sans-serif; }
+button, a, input, select, textarea { touch-action: manipulation; }
+:focus-visible { outline: 3px solid #d32165; outline-offset: 3px; }
