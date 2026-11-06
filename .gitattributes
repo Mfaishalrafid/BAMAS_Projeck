@@ -1,0 +1,2 @@
+# Preserve the supplied visual baseline byte-for-byte, including original whitespace.
+reference/BAMAS-desain-aplikasi-donasi.html -whitespace
