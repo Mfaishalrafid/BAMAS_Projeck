@@ -1,1 +1,4 @@
-export default function Home() { return <main className="mx-auto max-w-lg p-8"><h1 className="text-3xl font-bold">BAMAS</h1><p>Fondasi migrasi frontend.</p><p role="note">SIMULASI — bukan transaksi nyata.</p></main>; }
+import BamasApp from "./bamas-app";
+export default function Home() {
+  return <BamasApp />;
+}

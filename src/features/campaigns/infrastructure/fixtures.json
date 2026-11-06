@@ -1,0 +1,357 @@
+{
+  "categories": [
+    {
+      "id": "bencana",
+      "label": "Bencana",
+      "block": "bg-coral"
+    },
+    {
+      "id": "pendidikan",
+      "label": "Pendidikan",
+      "block": "bg-lime"
+    },
+    {
+      "id": "kesehatan",
+      "label": "Kesehatan",
+      "block": "bg-blush"
+    },
+    {
+      "id": "pangan",
+      "label": "Pangan",
+      "block": "bg-cream"
+    },
+    {
+      "id": "lingkungan",
+      "label": "Air & Lingkungan",
+      "block": "bg-mint"
+    },
+    {
+      "id": "sosial",
+      "label": "Sosial",
+      "block": "bg-lilac-soft"
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "banjir-garut",
+      "title": "Darurat banjir bandang Garut: kirim makanan & selimut",
+      "category": "bencana",
+      "image": "https://images.unsplash.com/photo-1600336153113-d66c79de3e91?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Relawan Siaga Jabar",
+      "verified": true,
+      "location": "Garut, Jawa Barat",
+      "target": 500000000,
+      "raised": 312450000,
+      "donors": 4812,
+      "daysLeft": 9,
+      "urgent": true,
+      "status": "active",
+      "story": [
+        "Hujan deras sejak Senin malam membuat Sungai Cimanuk meluap. Lebih dari 1.200 keluarga di 6 kecamatan kehilangan tempat tinggal dan kini bertahan di posko pengungsian.",
+        "Kebutuhan paling mendesak: makanan siap saji, air minum, selimut, popok bayi, dan obat-obatan. Tim kami sudah mendirikan 4 dapur umum yang memasak 3.000 porsi per hari.",
+        "Setiap Rp50.000 cukup untuk paket makan satu keluarga selama sehari. Donasi kamu langsung kami belanjakan di pasar lokal agar ekonomi warga ikut bergerak."
+      ],
+      "updates": [
+        {
+          "date": "5 Nov 2026",
+          "title": "Dapur umum ke-4 dibuka",
+          "body": "Dapur umum baru di Tarogong Kidul mulai beroperasi, melayani 800 porsi per hari."
+        },
+        {
+          "date": "3 Nov 2026",
+          "title": "Penyaluran tahap 1: Rp86 juta",
+          "body": "2.400 selimut, 900 paket sembako, dan 150 dus popok bayi telah dibagikan ke 3 posko."
+        }
+      ],
+      "supporters": [
+        {
+          "name": "Rina Kartika",
+          "amount": 250000,
+          "ago": "3 menit lalu",
+          "note": "Semoga cepat pulih, Garut kuat!"
+        },
+        {
+          "name": "Orang baik",
+          "amount": 100000,
+          "ago": "12 menit lalu"
+        },
+        {
+          "name": "Dimas Pratama",
+          "amount": 50000,
+          "ago": "25 menit lalu",
+          "note": "Sedikit dari kami sekeluarga."
+        },
+        {
+          "name": "Komunitas Lari Bandung",
+          "amount": 1500000,
+          "ago": "1 jam lalu",
+          "note": "Hasil donasi lari amal minggu lalu 🙏"
+        }
+      ]
+    },
+    {
+      "id": "operasi-rafa",
+      "title": "Bantu Rafa (4 th) jalani operasi jantung bocor",
+      "category": "kesehatan",
+      "image": "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Yayasan Sehat Bersama",
+      "verified": true,
+      "location": "Bandung, Jawa Barat",
+      "target": 180000000,
+      "raised": 121800000,
+      "donors": 2107,
+      "daysLeft": 14,
+      "urgent": true,
+      "status": "active",
+      "story": [
+        "Rafa didiagnosis mengalami kebocoran sekat jantung (VSD) sejak usia 8 bulan. Ia mudah lelah dan berat badannya jauh di bawah anak seusianya.",
+        "Dokter di RS Hasan Sadikin menyarankan operasi sebelum akhir tahun. Sebagian biaya ditanggung BPJS, namun biaya pendamping, obat, dan pemulihan masih kurang.",
+        "Ayah Rafa bekerja sebagai pengemudi ojek daring. Bantuan sekecil apa pun sangat berarti bagi keluarga ini."
+      ],
+      "updates": [
+        {
+          "date": "2 Nov 2026",
+          "title": "Jadwal operasi ditetapkan",
+          "body": "Operasi dijadwalkan 28 November 2026. Rafa sedang menjalani pemeriksaan pra-operasi."
+        }
+      ],
+      "supporters": [
+        {
+          "name": "Siti Nurhaliza",
+          "amount": 200000,
+          "ago": "8 menit lalu",
+          "note": "Sehat selalu, Rafa!"
+        },
+        {
+          "name": "Orang baik",
+          "amount": 75000,
+          "ago": "40 menit lalu"
+        }
+      ]
+    },
+    {
+      "id": "sekolah-pesisir",
+      "title": "Perbaiki ruang kelas SD pesisir Cilacap yang hampir roboh",
+      "category": "pendidikan",
+      "image": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Gerakan Guru Pesisir",
+      "verified": true,
+      "location": "Cilacap, Jawa Tengah",
+      "target": 250000000,
+      "raised": 98300000,
+      "donors": 1340,
+      "daysLeft": 32,
+      "status": "active",
+      "story": [
+        "Tiga dari enam ruang kelas SDN Pesisir 2 mengalami kerusakan atap berat. Saat hujan, siswa harus belajar berdesakan di ruang guru.",
+        "Dana akan digunakan untuk rangka atap baja ringan, plafon, lantai keramik, serta 60 set meja kursi baru."
+      ],
+      "updates": [
+        {
+          "date": "30 Okt 2026",
+          "title": "Survei teknis selesai",
+          "body": "Tim arsitek relawan menyelesaikan RAB renovasi. Material tahap pertama siap dibeli."
+        }
+      ],
+      "supporters": [
+        {
+          "name": "Andi Wijaya",
+          "amount": 500000,
+          "ago": "2 jam lalu",
+          "note": "Untuk masa depan anak-anak pesisir."
+        }
+      ]
+    },
+    {
+      "id": "sembako-lansia",
+      "title": "Paket sembako bulanan untuk 300 lansia sebatang kara",
+      "category": "pangan",
+      "image": "https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Dapur Peduli Bandung",
+      "verified": true,
+      "location": "Bandung, Jawa Barat",
+      "target": 90000000,
+      "raised": 71250000,
+      "donors": 1588,
+      "daysLeft": 6,
+      "status": "active",
+      "story": [
+        "Di Bandung Raya, ratusan lansia hidup sendiri tanpa penghasilan tetap. Banyak dari mereka hanya makan sekali sehari.",
+        "Setiap paket berisi beras 10 kg, minyak, telur, gula, susu, dan vitamin — diantar langsung oleh relawan ke rumah."
+      ],
+      "updates": [
+        {
+          "date": "1 Nov 2026",
+          "title": "Penyaluran Oktober tuntas",
+          "body": "287 lansia di Kiaracondong dan Antapani telah menerima paket bulan ini."
+        }
+      ],
+      "supporters": [
+        {
+          "name": "Orang baik",
+          "amount": 150000,
+          "ago": "15 menit lalu",
+          "note": "Untuk nenek dan kakek kita."
+        }
+      ]
+    },
+    {
+      "id": "air-sumba",
+      "title": "Sumur bor air bersih untuk Desa Kambata, Sumba Timur",
+      "category": "lingkungan",
+      "image": "https://images.unsplash.com/photo-1574482620811-1aa16ffe3c82?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Tirta Untuk Negeri",
+      "verified": true,
+      "location": "Sumba Timur, NTT",
+      "target": 120000000,
+      "raised": 44600000,
+      "donors": 712,
+      "daysLeft": 45,
+      "status": "active",
+      "story": [
+        "Warga Desa Kambata harus berjalan 4 km setiap pagi untuk mengambil air dari mata air yang sering kering saat kemarau.",
+        "Sumur bor sedalam 120 meter beserta tandon dan pipa distribusi akan melayani 210 keluarga."
+      ],
+      "updates": [
+        {
+          "date": "28 Okt 2026",
+          "title": "Titik bor ditemukan",
+          "body": "Hasil survei geolistrik menunjukkan sumber air di kedalaman ±110 m."
+        }
+      ],
+      "supporters": [
+        {
+          "name": "Maria Lestari",
+          "amount": 100000,
+          "ago": "1 jam lalu"
+        }
+      ]
+    },
+    {
+      "id": "beasiswa-yatim",
+      "title": "Beasiswa sekolah untuk 120 anak yatim Tasikmalaya",
+      "category": "pendidikan",
+      "image": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Rumah Yatim Al-Ikhlas",
+      "verified": false,
+      "location": "Tasikmalaya, Jawa Barat",
+      "target": 150000000,
+      "raised": 37900000,
+      "donors": 655,
+      "daysLeft": 60,
+      "status": "active",
+      "story": [
+        "Rumah Yatim Al-Ikhlas mendampingi 120 anak yatim dan dhuafa. Biaya seragam, buku, dan SPP menjadi beban terbesar setiap tahun ajaran.",
+        "Beasiswa diberikan selama satu tahun penuh dan dilaporkan secara berkala kepada donatur."
+      ],
+      "updates": [],
+      "supporters": [
+        {
+          "name": "Orang baik",
+          "amount": 50000,
+          "ago": "3 jam lalu"
+        }
+      ]
+    },
+    {
+      "id": "balai-kampung",
+      "title": "Renovasi balai warga Kampung Naga untuk kegiatan bersama",
+      "category": "sosial",
+      "image": "https://images.unsplash.com/photo-1617450365226-9bf28c04e130?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Karang Taruna Neglasari",
+      "verified": true,
+      "location": "Tasikmalaya, Jawa Barat",
+      "target": 75000000,
+      "raised": 52100000,
+      "donors": 430,
+      "daysLeft": 21,
+      "status": "active",
+      "story": [
+        "Balai warga adalah pusat kegiatan posyandu, pengajian, dan latihan seni Sunda. Atap ijuknya kini bocor di banyak titik.",
+        "Renovasi dilakukan bersama warga dengan tetap mempertahankan arsitektur tradisional."
+      ],
+      "updates": [],
+      "supporters": [
+        {
+          "name": "Yusuf Hidayat",
+          "amount": 300000,
+          "ago": "5 jam lalu",
+          "note": "Lestarikan budaya Sunda!"
+        }
+      ]
+    },
+    {
+      "id": "posko-cianjur",
+      "title": "Logistik posko relawan tanggap darurat gempa Cianjur",
+      "category": "bencana",
+      "image": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Relawan Siaga Jabar",
+      "verified": true,
+      "location": "Cianjur, Jawa Barat",
+      "target": 200000000,
+      "raised": 158700000,
+      "donors": 3021,
+      "daysLeft": 3,
+      "urgent": true,
+      "status": "active",
+      "story": [
+        "Gempa magnitudo 5,6 merusak lebih dari 900 rumah. Posko relawan membutuhkan tenda, terpal, genset, dan bahan bakar.",
+        "Seluruh logistik dikelola transparan dan dilaporkan harian melalui kabar terbaru."
+      ],
+      "updates": [
+        {
+          "date": "4 Nov 2026",
+          "title": "40 tenda keluarga terpasang",
+          "body": "Tenda dan terpal dibagikan di Desa Sukamulya dan Cibeureum."
+        }
+      ],
+      "supporters": [
+        {
+          "name": "Orang baik",
+          "amount": 1000000,
+          "ago": "30 menit lalu"
+        }
+      ]
+    },
+    {
+      "id": "perahu-nelayan",
+      "title": "Ganti perahu nelayan Pangandaran yang hancur diterjang ombak",
+      "category": "sosial",
+      "image": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Komunitas Bahari Pangandaran",
+      "verified": false,
+      "location": "Pangandaran, Jawa Barat",
+      "target": 140000000,
+      "raised": 0,
+      "donors": 0,
+      "daysLeft": 60,
+      "status": "review",
+      "submittedAt": "5 Nov 2026, 19.42",
+      "story": [
+        "Gelombang tinggi pekan lalu menghancurkan 14 perahu nelayan tradisional. Tanpa perahu, para nelayan kehilangan mata pencaharian."
+      ],
+      "updates": [],
+      "supporters": []
+    },
+    {
+      "id": "taman-baca",
+      "title": "Taman baca keliling untuk anak-anak di pelosok Garut Selatan",
+      "category": "pendidikan",
+      "image": "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&h=560&fit=crop&auto=format&q=70",
+      "organizer": "Pustaka Bergerak Garut",
+      "verified": false,
+      "location": "Garut, Jawa Barat",
+      "target": 60000000,
+      "raised": 0,
+      "donors": 0,
+      "daysLeft": 90,
+      "status": "review",
+      "submittedAt": "5 Nov 2026, 14.10",
+      "story": [
+        "Kami ingin mengubah satu mobil bak terbuka menjadi perpustakaan keliling yang menyambangi 12 desa setiap bulan."
+      ],
+      "updates": [],
+      "supporters": []
+    }
+  ]
+}
