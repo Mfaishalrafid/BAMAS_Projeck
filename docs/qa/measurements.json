@@ -1,0 +1,42 @@
+{
+  "before": {
+    "sameOriginBytes": 265367,
+    "javascriptBytes": 182652,
+    "cssBytes": 13423,
+    "pageErrors": [],
+    "mobileAxeViolations": [],
+    "horizontalOverflow": false
+  },
+  "static-control": {
+    "sameOriginBytes": 269447,
+    "javascriptBytes": 186246,
+    "cssBytes": 13909,
+    "pageErrors": [],
+    "mobileAxeViolations": [],
+    "horizontalOverflow": false
+  },
+  "after": {
+    "sameOriginBytes": 268699,
+    "javascriptBytes": 185552,
+    "cssBytes": 13855,
+    "pageErrors": [],
+    "mobileAxeViolations": [],
+    "horizontalOverflow": false
+  },
+  "final": {
+    "sameOriginBytes": 263225,
+    "javascriptBytes": 186246,
+    "cssBytes": 7687,
+    "pageErrors": [],
+    "mobileAxeViolations": [],
+    "horizontalOverflow": false
+  },
+  "release": {
+    "sameOriginBytes": 263277,
+    "javascriptBytes": 186246,
+    "cssBytes": 7739,
+    "pageErrors": [],
+    "mobileAxeViolations": [],
+    "horizontalOverflow": false
+  }
+}

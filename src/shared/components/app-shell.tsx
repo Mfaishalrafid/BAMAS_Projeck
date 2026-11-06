@@ -1,12 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo, Button } from "./ui";
 import { Icon } from "./icon";
 export const navigation = [
   ["home", "Beranda", "home"],
-  ["explore", "Jelajah", "search"],
+  ["explore", "Jelajah", "compass"],
   ["create", "Galang", "plus"],
-  ["history", "Donasiku", "book"],
+  ["history", "Donasiku", "receipt"],
   ["profile", "Profil", "user"],
 ];
 export function AppShell({
@@ -18,6 +18,15 @@ export function AppShell({
   screen: string;
   navigate: (screen: string, id?: string) => void;
 }) {
+  const mainRef = useRef<HTMLElement>(null);
+  const previousScreen = useRef(screen);
+  useEffect(() => {
+    if (previousScreen.current !== screen) {
+      mainRef.current?.focus({ preventScroll: true });
+      mainRef.current?.scrollTo(0, 0);
+      previousScreen.current = screen;
+    }
+  }, [screen]);
   const [scale, setScale] = useState(1);
   useEffect(() => {
     const resize = () =>
@@ -28,8 +37,14 @@ export function AppShell({
   }, []);
   return (
     <div className="desktop-layout">
+      <a className="skip-link" href="#main-content">
+        Lewati ke aplikasi
+      </a>
       <aside className="intro">
-        <Logo />
+        <div className="desktop-brand">
+          <Logo />
+          <p>Bantu Masyarakat</p>
+        </div>
         <p className="eyebrow magenta">
           Desain aplikasi · prototipe interaktif v1
         </p>
@@ -47,16 +62,16 @@ export function AppShell({
           Klik ponsel di samping — <b>semua layar bisa dicoba.</b>
         </p>
         <section className="screen-map">
-          <p className="eyebrow">Jelajahi layar</p>
+          <p className="eyebrow">Lompat ke layar</p>
           {[
             ["home", "Beranda", "Kampanye unggulan, kategori, mendesak"],
             ["explore", "Jelajah", "Cari, filter kategori, urutkan"],
             ["detail", "Detail kampanye", "Progres dana, cerita, kabar, doa"],
-            ["donate", "Donasi", "Nominal, metode, doa"],
-            ["history", "Riwayat", "Lacak donasi kamu"],
-            ["create", "Galang dana", "Buat kampanye baru"],
-            ["profile", "Profil", "Kampanye dan simpanan"],
-            ["admin", "Admin", "Moderasi kampanye demo"],
+            ["donate", "Alur donasi", "Nominal → metode → konfirmasi → bayar"],
+            ["history", "Riwayat donasi", "Total kebaikan & status transaksi"],
+            ["profile", "Profil donatur", "Level, tersimpan, pengaturan"],
+            ["create", "Galang dana", "Form 4 langkah dengan validasi"],
+            ["admin", "Dashboard admin", "KPI, grafik, verifikasi kampanye"],
           ].map(([id, label, desc], i) => (
             <button
               key={id}
@@ -88,6 +103,9 @@ export function AppShell({
           </p>
           <Button onClick={() => navigate("donate", "banjir-garut")}>
             Mulai donasi →
+          </Button>{" "}
+          <Button className="secondary" onClick={() => navigate("admin")}>
+            Buka dashboard admin
           </Button>
         </section>
       </aside>
@@ -102,7 +120,14 @@ export function AppShell({
               <span className="camera" />
               <span>▮▮▮ ◉ ▰</span>
             </div>
-            <main id="main-content" className="phone-content" key={screen}>
+            <main
+              id="main-content"
+              className="phone-content"
+              key={screen}
+              ref={mainRef}
+              tabIndex={-1}
+              aria-label="Aplikasi BAMAS"
+            >
               {children}
             </main>
             {[
@@ -133,23 +158,54 @@ export function AppShell({
         </div>
       </div>
       <aside className="design-notes">
-        <p className="eyebrow">Identitas visual</p>
-        <h2>
-          Hangat. Terbuka.
-          <br />
-          Penuh harapan.
-        </h2>
-        <p>Warna</p>
+        <p className="eyebrow">Palet warna</p>
         <div className="swatches">
-          {["ink", "magenta", "lime", "lilac", "coral", "mint"].map((c) => (
-            <span key={c} className={`bg-${c}`} title={c} />
+          {[
+            ["ink", "Tinta", "CTA utama, teks"],
+            ["magenta", "Magenta", "Aksen & donasi"],
+            ["lime", "Lime", "Sukses, sorotan"],
+            ["lilac", "Lilac", "Level, QRIS"],
+            ["coral", "Coral", "Bencana, darurat"],
+            ["mint", "Mint", "Air, keamanan"],
+            ["cream", "Cream", "Pangan, tips"],
+            ["blush", "Blush", "Kesehatan"],
+          ].map(([id, label, hint]) => (
+            <div key={id}>
+              <span className={`bg-${id}`} />
+              <b>{label}</b>
+              <small>{hint}</small>
+            </div>
           ))}
         </div>
-        <p>Tipografi</p>
-        <h2>Bricolage Grotesque</h2>
-        <p>Judul & angka · 500–700</p>
-        <b>Plus Jakarta Sans</b>
-        <p>Teks & UI · 400–700 · dibuat di Indonesia</p>
+        <p className="eyebrow">Tipografi</p>
+        <div className="type-card">
+          <section>
+            <strong className="display-sample">Aa</strong>
+            <b>Bricolage Grotesque</b>
+            <small>Judul & angka · 500–700</small>
+          </section>
+          <section>
+            <strong>Aa</strong>
+            <b>Plus Jakarta Sans</b>
+            <small>Teks & UI · 400–700 · dibuat di Indonesia</small>
+          </section>
+        </div>
+        <p className="eyebrow">Komponen</p>
+        <div className="component-card">
+          <div>
+            <span className="button">Utama</span>
+            <span className="button accent">Donasi</span>
+            <span className="button secondary">Sekunder</span>
+          </div>
+          <p>
+            <span className="badge bg-coral">BENCANA</span>{" "}
+            <span className="badge bg-lime">PENDIDIKAN</span>{" "}
+            <span className="badge urgent">MENDESAK</span>
+          </p>
+          <div className="progress">
+            <span style={{ width: "64%" }} />
+          </div>
+        </div>
         <p className="eyebrow">Prinsip</p>
         <ul>
           <li>Tombol selalu berbentuk pil, satu aksi utama per layar.</li>
@@ -157,7 +213,7 @@ export function AppShell({
           <li>Status selalu ikon + teks, tidak hanya warna.</li>
         </ul>
         <p>
-          <kbd>Esc</kbd> kembali
+          <kbd>Esc</kbd> kembali　 <kbd>/</kbd> cari (di Jelajah)
         </p>
         <p className="notice">SIMULASI — bukan transaksi nyata.</p>
       </aside>

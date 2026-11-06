@@ -1,7 +1,7 @@
 # BAMAS_Projeck
 Aplikasi penggalangan dana, untuk membantu masyarakat.
 
-Status: F1 — fondasi Next.js tersedia; migrasi layar bertahap. Belum ada backend, autentikasi atau pembayaran nyata. Repository ini meneruskan repository asli, bukan pengganti.
+Status: F1 — frontend demo dengan layar kampanye, donasi, galang dana, profil dan admin. Belum ada backend, autentikasi atau pembayaran nyata. Repository ini meneruskan repository asli, bukan pengganti.
 
 - [Instruksi agent](AGENTS.md)
 - [Audit handover](docs/PR0_AUDIT.md) dan [F0 Migoo](docs/AUDIT_BAMAS.md)
@@ -15,8 +15,18 @@ Jalankan `python3 scripts/check_docs.py` dan `git diff --check`. CI menjalankan 
 ## Kontribusi dan rilis
 Gunakan feature branch dan PR; jangan push ke main atau merge otomatis. Pertahankan desain dan frame ponsel desktop. Jangan commit secrets. F1 hanya SIMULASI; production deployment memerlukan security review dan persetujuan pemilik. Tidak ada pipeline deploy aktif pada PR-0.
 
-## Pengembangan F1 (PR-1)
+## Pengembangan F1
 Node.js 24 LTS dan npm. Jalankan `npm ci`, lalu `npm run dev` dan buka http://localhost:3000.
 Pemeriksaan: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`.
 `npm start` menjalankan build production secara lokal; ini bukan izin deployment.
-PR-1 menyiapkan fondasi; migrasi layar dimulai PR-2. Semua data F1 bersifat demo.
+Semua data F1 bersifat demo. Tidak ada uang yang ditagih atau disalurkan. Admin demo terbuka untuk mencoba alur; bukan autentikasi produksi.
+
+
+## Browser, aksesibilitas dan review
+Setelah `npm run build`, jalankan `npx playwright install chromium` lalu `npm run test:e2e`. Suite memakai production server **lokal** port 3001. CI menginstal browser/dependensi lalu menjalankan suite yang sama. `npm run format:check` memeriksa source yang dikelola.
+
+`npm start -- --port 3001` dan `npm run audit:browser -- current` menghasilkan screenshot serta JSON pengukuran di `artifacts/` (diabaikan Git). Aset gambar Unsplash memerlukan jaringan; error/kelambatan eksternal bukan bukti backend BAMAS bermasalah.
+
+Data tersimpan di key `bamas-f1-simulation-v1` pada browser. Gunakan Profil → Reset data demo untuk kembali ke fixture awal. Data ini dapat diubah pengguna dan tidak boleh dijadikan ledger. Jangan masukkan data pribadi nyata ke formulir demo.
+
+Lihat [progres F1](docs/F1_PROGRESS.md) dan [laporan QA F1](docs/F1_QA.md). PR disusun bertingkat, tanpa auto-merge. F2 membutuhkan otorisasi baru.

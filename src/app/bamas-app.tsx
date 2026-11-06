@@ -7,14 +7,14 @@ import {
   ExploreScreen,
   DetailScreen,
 } from "@/features/campaigns/presentation/campaign-screens";
+import { useDemo } from "@/features/demo/application/use-demo";
+import type { DonationInput } from "@/features/donations/domain/donation";
 import {
   DonateScreen,
   PaymentScreen,
   SuccessScreen,
   HistoryScreen,
 } from "@/features/donations/presentation/donation-screens";
-import { useDemo } from "@/features/demo/application/use-demo";
-import type { DonationInput } from "@/features/donations/domain/donation";
 import { CreateScreen } from "@/features/campaigns/presentation/create-screen";
 import { AdminScreen } from "@/features/admin/presentation/admin-screen";
 import {

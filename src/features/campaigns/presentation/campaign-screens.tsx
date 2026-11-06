@@ -1,7 +1,7 @@
 "use client";
 /* Images retain the reference Unsplash URL sizing; no Next image proxy in F1. */
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Campaign } from "../domain/campaign";
 import { findCampaigns, progress } from "../domain/campaign";
 import fixtures from "../infrastructure/fixtures.json";
@@ -94,7 +94,22 @@ export function HomeScreen({
         <h1>
           Kebaikan kecil,
           <br />
-          <span>dampak besar.</span>
+          <span>
+            dampak besar.
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 200 10"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M2 7c40-5 90-6 196-2"
+                stroke="var(--color-accent)"
+                strokeWidth="3.5"
+                fill="none"
+                strokeLinecap="round"
+              />
+            </svg>
+          </span>
         </h1>
       </section>
       <button className="search-trigger" onClick={() => navigate("explore")}>
@@ -105,7 +120,7 @@ export function HomeScreen({
           <button key={c.id} onClick={() => navigate("explore", c.id)}>
             <span className={c.block}>
               <Icon
-                name={["water", "book", "heart", "food", "water", "user"][i]}
+                name={["waves", "book", "health", "food", "water", "social"][i]}
               />
             </span>
             {c.label.split(" ")[0]}
@@ -179,6 +194,22 @@ export function ExploreScreen({
   initial?: string;
 }) {
   const [query, setQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement;
+      if (
+        event.key === "/" &&
+        !["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName) &&
+        !target.isContentEditable
+      ) {
+        event.preventDefault();
+        searchRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  }, []);
   const [category, setCategory] = useState(initial);
   const [sort, setSort] = useState("mendesak");
   const results = findCampaigns(campaigns, query, category, sort);
@@ -188,6 +219,7 @@ export function ExploreScreen({
       <label className="search-trigger">
         <Icon name="search" />
         <input
+          ref={searchRef}
           aria-label="Cari kampanye"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
