@@ -22,3 +22,10 @@ PASS: lint, typecheck, 5 unit tests, production build, E2E Chromium pembayaran�
 ## PR-4
 Galang dana 4 tahap dengan validasi, foto fixture, review dan persetujuan; kampanye saya; profil, simpanan dan reset terkonfirmasi; dashboard admin demo dengan KPI, grafik ilustrasi dan approve/reject. Kampanye review/rejected tidak muncul di Jelajah. Moderasi hanya transisi review→active/rejected, bukan otorisasi produksi. Tidak menjanjikan verifikasi nyata 1×24 jam seperti teks prototype; diganti penjelasan SIMULASI. Grafik diberi label ilustrasi, bukan analytics aktual.
 PASS PR-4: lint, typecheck, 6 unit tests, production build, 2 E2E Chromium (donasi dan pengajuan→moderasi→reload→reset). RBAC/auth production NOT RUN karena F2 belum diimplementasikan.
+
+
+## PR-5
+Memulihkan ikon Lucide, panel palet/tipografi/komponen desktop dan garis judul referensi; menambah skip link, fokus navigasi dan shortcut pencarian. Perbaikan kontras berdasarkan axe. CI menjalankan E2E Chromium terhadap production build lokal. Script audit menghasilkan screenshot/Resource Timing. Scanning Tailwind dibatasi src: aset same-origin berkurang sekitar 2,3% pada perbandingan PR-5 yang sama. Eksperimen dynamic import tidak dipertahankan karena manfaat hanya sekitar 0,3%.
+Laporan terperinci dan batas cakupan: [F1_QA.md](F1_QA.md). Tidak ada merge, deploy, auth/backend atau pembayaran nyata. F2 menunggu persetujuan baru.
+PASS PR-5 final: lint, typecheck, 6 unit, build, 7 E2E Chromium, format, dokumentasi/checksum, whitespace, scan pola secrets terbatas. Audit npm semula 8 moderate transitif tooling; override terarah diuji lint dan audit ulang menghasilkan 0 vulnerability. Bukti screenshot dan pengukuran tersimpan di docs/qa.
+Follow-up PR-5: memperbaiki hasil axe yang tidak stabil selama fade-in; teks tetap opacity penuh, audit menunggu animasi/font selesai. PASS 21/21 eksekusi browser (3× suite, 2 worker), lint/typecheck/build. Arsitektur diperbarui sesuai implementasi F1.

@@ -1,6 +1,6 @@
 # Arsitektur BAMAS
 
-Status: target, belum diimplementasikan. PR-0 hanya dokumentasi dan CI. Baseline adalah HTML bundle React; tidak ada source aplikasi maintainable atau backend pada commit awal.
+Status: fondasi frontend F1 sudah diimplementasikan pada PR-1–PR-5. Bagian backend di bawah tetap target F2–F5. Baseline commit awal hanya README; HTML bundle React disimpan sebagai referensi PR-0.
 
 ## Struktur target
 Next.js 16 App Router + TypeScript strict + Tailwind CSS 4. Satu deployable modular monolith. `src/app` menangani routing/composition; `src/features/<feature>` menampung presentation, application, domain dan infrastructure sesuai kebutuhan; `src/shared` hanya komponen/utilitas yang benar-benar digunakan lintas fitur. Kandidat fitur dari referensi: campaign, donation, profile, admin. Jangan membuat scaffold pada PR-0.
@@ -16,3 +16,8 @@ F3 menambahkan aturan kampanye, moderasi dan audit trail. F4 adapter sandbox ter
 F5 membutuhkan security review, backup/restore teruji, observability tanpa PII/secrets, rollback dan persetujuan deployment. Hosting/provider belum dipilih. CI PR-0 memvalidasi dokumentasi; build/test aplikasi ditambahkan PR-1. Tidak ada CD production aktif.
 
 Lihat [roadmap](MIGRATION_ROADMAP.md), [keputusan](adr/0001-stack-and-boundaries.md), dan [audit](PR0_AUDIT.md). Dokumen model/API dari Migoo adalah proposal, bukan kontrak yang sudah diimplementasikan.
+
+
+## Implementasi F1 saat ini
+`src/app/page.tsx` dan layout adalah Server Components; `bamas-app.tsx` mengomposisikan interaksi layar prototype pada satu route. `features/campaigns` memuat model/filter, validasi pengajuan, fixture, dan presentation; `features/donations` memuat validasi nominal/metode dan layar donasi; `features/demo` mengelola reducer simulasi lintas fitur dan adapter localStorage; admin/profile hanya presentation demo. `shared/components` menyimpan shell, ikon dan UI reusable. Tidak ada ORM, endpoint pembayaran atau server authorization.
+State layar tetap mengikuti prototype dan deep link kampanye memakai query `campaign`; route per fitur serta adapter database akan dievaluasi pada F2. Semua data lokal tidak dipercaya untuk transaksi nyata. Tes berada di tests (domain/state) dan tests/e2e (browser); CI menjalankan keduanya. Lihat [QA F1](F1_QA.md) untuk cakupan dan pengecualian.
