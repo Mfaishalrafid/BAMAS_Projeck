@@ -44,3 +44,7 @@ Screenshot adalah bukti inspeksi Beranda, bukan tes pixel diff seluruh aplikasi.
 ## Dependency dan secrets
 PASS: scan pola secrets terbatas (private key, GitHub token, AWS access key ID, Stripe live key); bukan audit secrets menyeluruh.
 `npm audit` awal melaporkan 8 moderate yang berasal dari minimatch 10.2.6 pada typescript-eslint (amplifikasi glob/DoS). Override terbatas pada `@typescript-eslint/typescript-estree → minimatch 11.0.1` memperbaikinya; Node 24 kompatibel, lint diuji ulang PASS. Audit ulang: 0 low/moderate/high/critical. Hapus override ketika upstream sudah menggunakan versi aman; jangan memakai audit fix --force yang menyarankan downgrade Next ESLint config ke 15.
+
+## Stabilitas CI
+Pada commit 427f288, run PR 42250241378 PASS tetapi run push 42250174569 FAIL pada kontras teks `.muted` saat masuk admin. CSS memakai opacity 0,5 selama animasi masuk 180ms. Perbaikan mempertahankan gerakan horizontal dengan opacity penuh; helper axe menunggu font dan animasi finite selesai tanpa sleep tetap atau menonaktifkan aturan. Perubahan ini menjaga keterbacaan selama transisi dan mencegah pengukuran pada frame parsial. Suite diuji berulang dengan dua worker seperti runner CI.
+PASS setelah perbaikan: lint, typecheck, production build dan 21/21 eksekusi browser (7 skenario × 3 pengulangan, 2 worker). Tidak memakai retry untuk meloloskan hasil.

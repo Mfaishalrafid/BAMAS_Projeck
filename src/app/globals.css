@@ -756,11 +756,9 @@ h3 {
   }
   @keyframes enter {
     from {
-      opacity: 0.5;
       transform: translateX(8px);
     }
     to {
-      opacity: 1;
       transform: none;
     }
   }
