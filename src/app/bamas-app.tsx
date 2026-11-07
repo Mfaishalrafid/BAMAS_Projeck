@@ -48,12 +48,18 @@ export default function BamasApp() {
     return () => window.removeEventListener("keydown", key);
   }, []);
   useEffect(() => {
-    const id = new URLSearchParams(location.search).get("campaign");
-    if (id) {
-      // Read the share link after hydration, keeping server/client initial markup identical.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setStack([{ name: "home" }, { name: "detail", id }]);
-    }
+    const params = new URLSearchParams(location.search);
+    const screen = params.get("screen");
+    const id = params.get("campaign");
+    const initial = id
+      ? [{ name: "home" }, { name: "detail", id }]
+      : screen &&
+          ["home", "explore", "create", "history", "profile"].includes(screen)
+        ? [{ name: screen }]
+        : null;
+    // Synchronize an explicit browser share link after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (initial) setStack(initial);
   }, []);
   const createDonation = (input: DonationInput) => {
     const id = crypto.randomUUID();
