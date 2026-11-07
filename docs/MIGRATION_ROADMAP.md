@@ -1,6 +1,6 @@
 # Roadmap migrasi
 
-Setiap PR memerlukan review; jangan merge otomatis. PR-1 sampai PR-5 untuk F1 telah diotorisasi pemilik pada 2026-11-05; F2–F5 belum diotorisasi.
+Setiap PR memerlukan review; jangan merge otomatis. PR-1 sampai PR-5 untuk F1 telah diotorisasi pemilik pada 2026-11-05; F2 diotorisasi pada 2026-11-07. F3–F5 belum diotorisasi.
 
 | Fase / PR | Hasil | Gate penerimaan |
 | --- | --- | --- |
@@ -16,3 +16,5 @@ Setiap PR memerlukan review; jangan merge otomatis. PR-1 sampai PR-5 untuk F1 te
 | F5 | Production readiness dan deployment | Security review, backup/restore, rollback, monitoring; persetujuan pemilik sebelum deploy |
 
 Pembayaran nyata dan payout tidak otomatis diizinkan oleh F5. Provider, kebijakan guest, retensi data dan aturan moderasi diputuskan sebelum fase terkait. Bahan visual hilang atau perilaku ambigu menjadi blocker untuk bagian migrasi tersebut; jangan mengganti dengan desain rekaan.
+
+Implementasi F2: lihat [setup](F2_SETUP.md) dan [QA](F2_QA.md). Login saat ini untuk localhost; email delivery dan kesiapan auth publik masih menjadi gate sebelum penggunaan publik. PR F2 tidak di-merge otomatis.

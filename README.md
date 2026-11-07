@@ -1,7 +1,7 @@
 # BAMAS_Projeck
 Aplikasi penggalangan dana, untuk membantu masyarakat.
 
-Status: F1 — frontend demo dengan layar kampanye, donasi, galang dana, profil dan admin. Belum ada backend, autentikasi atau pembayaran nyata. Repository ini meneruskan repository asli, bukan pengganti.
+Status: F2 — PostgreSQL/Prisma dan akun server dengan RBAC tersedia untuk development lokal. Frontend F1 tetap SIMULASI; belum ada pembayaran nyata. Repository ini meneruskan repository asli, bukan pengganti.
 
 - [Instruksi agent](AGENTS.md)
 - [Audit handover](docs/PR0_AUDIT.md) dan [F0 Migoo](docs/AUDIT_BAMAS.md)
@@ -29,4 +29,7 @@ Setelah `npm run build`, jalankan `npx playwright install chromium` lalu `npm ru
 
 Data tersimpan di key `bamas-f1-simulation-v1` pada browser. Gunakan Profil → Reset data demo untuk kembali ke fixture awal. Data ini dapat diubah pengguna dan tidak boleh dijadikan ledger. Jangan masukkan data pribadi nyata ke formulir demo.
 
-Lihat [progres F1](docs/F1_PROGRESS.md) dan [laporan QA F1](docs/F1_QA.md). PR disusun bertingkat, tanpa auto-merge. F2 membutuhkan otorisasi baru.
+Lihat [progres F1](docs/F1_PROGRESS.md) dan [laporan QA F1](docs/F1_QA.md). PR disusun bertingkat, tanpa auto-merge. F2 diotorisasi pada 2026-11-07; F3 belum dimulai.
+
+## Backend F2
+Lihat [setup dan kontrak API F2](docs/F2_SETUP.md), [ADR autentikasi](docs/adr/0003-f2-database-auth.md), dan [QA F2](docs/F2_QA.md). Login tersedia di `/akun`; akun baru DONOR. Auth publik diblokir sampai layanan verifikasi email siap.

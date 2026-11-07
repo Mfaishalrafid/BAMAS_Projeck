@@ -1,6 +1,6 @@
 # BAMAS — Model Data dan Kontrak API Target
 
-Dokumen desain untuk fase F2–F4. **Belum dijalankan sebagai migrasi DB/API.** Gunakan schema versioned dan review sebelum mengubah database.
+Dokumen desain untuk fase F2–F4. **Sebagian telah diimplementasikan pada F2; kontrak aktual ada di [F2_SETUP](F2_SETUP.md) dan schema Prisma.** Tabel review, update, payment dan audit di bawah tetap target F3–F4. Gunakan schema versioned dan review sebelum mengubah database.
 
 ## Relasi inti
 
@@ -23,7 +23,7 @@ Dokumen desain untuk fase F2–F4. **Belum dijalankan sebagai migrasi DB/API.** 
 
 | Tabel | Kolom inti / constraint |
 |---|---|
-| `User` | id(UUID), name, email(unique), role(default DONOR), createdAt; plus Auth.js Account/Session/VerificationToken sesuai pilihan login |
+| `User` | id(UUID), name, email(unique), role(default DONOR), createdAt; plus Better Auth Account/Session/Verification sesuai pilihan login |
 | `Campaign` | id(UUID), slug(unique), ownerId(FK User), title, story, category, targetIdr(BIGINT), status, reviewedAt, createdAt, updatedAt |
 | `CampaignUpdate` | id, campaignId, body, createdAt; authorId |
 | `CampaignReview` | id, campaignId, adminId, decision, reason, createdAt; immutable audit |
@@ -57,7 +57,7 @@ Semua ID dari server, bukan `Math.random()`/Date.now() sebagai payment key. Tamb
 | POST | `/api/payments/webhooks/[provider]` | Provider-verified | verified, idempotent, atomic settlement |
 | GET/POST | `/api/me/bookmarks` | Authenticated | baca/tambah simpan kampanye |
 
-Auth.js handle routes disediakan oleh library. Tidak ada `PATCH donation.status = paid` publik. Rate limit terutama create donation, auth, upload, webhook. Gunakan response JSON typed + structured error code yang stabil.
+Better Auth handle routes disediakan oleh library. Tidak ada `PATCH donation.status = paid` publik. Rate limit terutama create donation, auth, upload, webhook. Gunakan response JSON typed + structured error code yang stabil.
 
 ## Guest & privacy decision
 
@@ -71,3 +71,6 @@ Pengunjung dapat menjelajah tanpa login. Agar janji prototipe “siapa pun bisa 
 - Callback identik 2x/10x -> **satu** perubahan ledger; transaksi atomik.
 - Callback `PAID` disusul `PENDING` lama -> tetap `PAID` jika aturan provider menyatakan.
 - Simulasi & payment live tidak bercampur database/accounting.
+
+## Perbedaan F2 terhadap target
+Donor wajib memiliki akun (guest belum diaktifkan). Database F2 berisi User/Session/Account/Verification/RateLimit/Campaign/CampaignBookmark/Donation saja. Status tersedia sebagai enum, tetapi transisi moderasi dan pembayaran belum diimplementasikan. Donation hanya dibaca; fixture tes bukan transaksi. Pengisian paidAt, field reviewedAt, PaymentAttempt/Event dan audit trail menunggu fase terkait.

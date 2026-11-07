@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  DONOR
+  CAMPAIGNER
+  ADMIN
+}
+
+enum CampaignStatus {
+  DRAFT
+  REVIEW
+  ACTIVE
+  REJECTED
+  CLOSED
+}
+
+enum DonationStatus {
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+  REFUNDED
+}
+
+model User {
+  id            String             @id @default(uuid())
+  name          String
+  email         String             @unique
+  emailVerified Boolean            @default(false)
+  image         String?
+  role          Role               @default(DONOR)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  campaigns     Campaign[]
+  donations     Donation[]
+  bookmarks     CampaignBookmark[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(uuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verifications")
+}
+
+model RateLimit {
+  id          String @id @default(uuid())
+  key         String @unique
+  count       Int
+  lastRequest BigInt
+
+  @@map("rate_limits")
+}
+
+model Campaign {
+  id           String             @id @default(uuid())
+  slug         String             @unique
+  ownerId      String
+  owner        User               @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  title        String
+  story        String
+  category     String
+  location     String
+  image        String
+  targetIdr    BigInt
+  durationDays Int
+  status       CampaignStatus     @default(DRAFT)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  bookmarks    CampaignBookmark[]
+  donations    Donation[]
+
+  @@index([ownerId, createdAt])
+  @@index([status, createdAt])
+  @@map("campaigns")
+}
+
+model CampaignBookmark {
+  userId     String
+  campaignId String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@id([userId, campaignId])
+  @@map("campaign_bookmarks")
+}
+
+model Donation {
+  id           String         @id @default(uuid())
+  campaignId   String
+  campaign     Campaign       @relation(fields: [campaignId], references: [id], onDelete: Restrict)
+  donorId      String
+  donor        User           @relation(fields: [donorId], references: [id], onDelete: Restrict)
+  amountIdr    BigInt
+  status       DonationStatus @default(PENDING)
+  anonymous    Boolean        @default(false)
+  donorMessage String?
+  createdAt    DateTime       @default(now())
+  paidAt       DateTime?
+
+  @@index([donorId, createdAt])
+  @@index([campaignId, status])
+  @@map("donations")
+}
