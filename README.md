@@ -32,4 +32,4 @@ Data tersimpan di key `bamas-f1-simulation-v1` pada browser. Gunakan Profil → 
 Lihat [progres F1](docs/F1_PROGRESS.md) dan [laporan QA F1](docs/F1_QA.md). PR disusun bertingkat, tanpa auto-merge. F2 diotorisasi pada 2026-11-07; F3 belum dimulai.
 
 ## Backend F2
-Lihat [setup dan kontrak API F2](docs/F2_SETUP.md), [ADR autentikasi](docs/adr/0003-f2-database-auth.md), dan [QA F2](docs/F2_QA.md). Login tersedia di `/akun`; akun baru DONOR. Auth publik diblokir sampai layanan verifikasi email siap.
+Lihat [setup dan kontrak API F2](docs/F2_SETUP.md), [ADR autentikasi](docs/adr/0003-f2-database-auth.md), dan [QA F2](docs/F2_QA.md). Login tersedia di `/akun`; akun baru DONOR. Verifikasi email dan reset password tersedia melalui SMTP. Penggunaan publik membutuhkan konfigurasi provider/domain serta pengujian penerimaan email; belum ada deployment. Lihat [QA pelengkap F2](docs/F2_EMAIL_QA.md).

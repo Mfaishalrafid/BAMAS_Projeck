@@ -4,7 +4,8 @@ import { isRole, type Actor } from "../domain/authorization";
 import { HttpError } from "@/shared/server/http";
 export async function currentActor(request: Request): Promise<Actor | null> {
   const session = await getAuth().api.getSession({ headers: request.headers });
-  if (!session || !isRole(session.user.role)) return null;
+  if (!session || !session.user.emailVerified || !isRole(session.user.role))
+    return null;
   return {
     id: session.user.id,
     name: session.user.name,

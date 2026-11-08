@@ -6,8 +6,14 @@ import {
   HttpError,
 } from "@/shared/server/http";
 export const runtime = "nodejs";
+async function handle(request: Request) {
+  const response = await getAuth().handler(request);
+  response.headers.set("Cache-Control", "no-store");
+  response.headers.set("Referrer-Policy", "no-referrer");
+  return response;
+}
 export function GET(request: Request) {
-  return endpoint(() => getAuth().handler(request));
+  return endpoint(() => handle(request));
 }
 export function POST(request: Request) {
   return endpoint(async () => {
@@ -25,7 +31,7 @@ export function POST(request: Request) {
       );
     const headers = new Headers(request.headers);
     headers.delete("content-length");
-    return getAuth().handler(
+    return handle(
       new Request(request.url, {
         method: "POST",
         headers,

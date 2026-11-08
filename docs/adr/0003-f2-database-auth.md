@@ -1,6 +1,6 @@
 # ADR-0003 — PostgreSQL, Prisma dan session F2
 
-Status: diterapkan untuk pengembangan lokal F2, 2026-11-07.
+Status: diterapkan untuk pengembangan lokal F2, 2026-11-07. Pengecualian verifikasi email di bawah digantikan oleh [ADR-0004](0004-verified-accounts-and-recovery.md) pada 2026-11-08.
 
 ## Keputusan
 PostgreSQL 17 dengan Prisma 7.10.1 dan adapter `pg`; migrasi SQL terversi menyimpan constraints nominal integer IDR. Prisma 8 masih prerelease saat implementasi dan belum didukung adapter auth. Client digenerate saat install, tidak disimpan dalam Git. Package memakai ES modules agar Prisma client dan test runner konsisten.

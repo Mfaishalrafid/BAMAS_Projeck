@@ -1,5 +1,7 @@
 # QA F2 — 2026-11-07
 
+Catatan historis PR #7. Hasil pelengkap verifikasi/reset email ada di [QA F2 email](F2_EMAIL_QA.md); batas localhost tanpa verifikasi di laporan ini telah digantikan.
+
 Lingkup: PostgreSQL 17, Prisma 7, Better Auth, RBAC/ownership dan layar akun lokal. Branch `feat/bamas-f2-database-auth`; tidak ada deploy atau merge otomatis.
 
 ## Bukti pemeriksaan

@@ -97,11 +97,23 @@ export function AccountScreen() {
       await api(`/api/auth/${register ? "sign-up" : "sign-in"}/email`, "POST", {
         email: String(form.get("email")),
         password: String(form.get("password")),
-        ...(register ? { name: String(form.get("name")) } : {}),
+        ...(register
+          ? {
+              name: String(form.get("name")),
+              callbackURL: `${window.location.origin}/akun/verifikasi`,
+            }
+          : {}),
       });
-      await load();
+      if (register) {
+        setNotice(
+          "Jika pendaftaran memenuhi syarat, email verifikasi dikirim. Periksa kotak masuk sebelum masuk ke akun.",
+        );
+        setRegister(false);
+      } else await load();
     } catch {
-      setError("Tidak dapat masuk atau mendaftar. Periksa data dan coba lagi.");
+      setError(
+        "Tidak dapat masuk atau mendaftar. Periksa data, pastikan email sudah diverifikasi, lalu coba lagi.",
+      );
     } finally {
       setBusy(false);
     }
@@ -226,6 +238,14 @@ export function AccountScreen() {
                 {busy ? "Memproses…" : register ? "Daftar akun" : "Masuk akun"}
               </Button>
             </form>
+            <p>
+              <Link href="/akun/lupa-password">Lupa kata sandi?</Link>
+            </p>
+            <p>
+              <Link href="/akun/kirim-verifikasi">
+                Kirim ulang email verifikasi
+              </Link>
+            </p>
           </>
         ) : (
           <>
