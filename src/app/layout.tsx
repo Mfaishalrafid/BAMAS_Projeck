@@ -4,6 +4,9 @@ import "@fontsource-variable/plus-jakarta-sans";
 import "./globals.css";
 export const metadata: Metadata = {
   title: "BAMAS — Bantu Masyarakat",
+  ...(process.env.NEXT_PUBLIC_BAMAS_DEMO_ONLY === "true"
+    ? { robots: { index: false, follow: false } }
+    : {}),
   description:
     "Prototipe aplikasi donasi BAMAS. SIMULASI — bukan transaksi nyata.",
 };
