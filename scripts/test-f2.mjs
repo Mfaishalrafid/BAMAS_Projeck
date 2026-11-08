@@ -33,6 +33,8 @@ const docker = (args, capture = false) =>
     capture,
   );
 let started = false;
+let mailStarted = false;
+const mailName = `${name}-mail`;
 try {
   const envFile = join(dir, "postgres.env");
   writeFileSync(
@@ -79,18 +81,62 @@ try {
   if (!ready) throw new Error("PostgreSQL test startup timeout.");
   const address = docker(["port", name, "5432/tcp"], true);
   const port = address.split(":").at(-1);
+  docker(
+    [
+      "run",
+      "--rm",
+      "-d",
+      "--name",
+      mailName,
+      "-p",
+      "127.0.0.1::1025",
+      "-p",
+      "127.0.0.1::8025",
+      "axllent/mailpit@sha256:aef2aacc11f075ec0fb6874275ee4a421e688e11a96ebb296134d1735c7761ce",
+    ],
+    true,
+  );
+  mailStarted = true;
+  const smtpPort = docker(["port", mailName, "1025/tcp"], true)
+    .split(":")
+    .at(-1);
+  const mailPort = docker(["port", mailName, "8025/tcp"], true)
+    .split(":")
+    .at(-1);
+  const mailURL = `http://127.0.0.1:${mailPort}`;
+  let mailReady = false;
+  for (let i = 0; i < 30; i++) {
+    try {
+      if ((await fetch(`${mailURL}/readyz`)).ok) {
+        mailReady = true;
+        break;
+      }
+    } catch {
+      /* starting */
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  if (!mailReady) throw new Error("Mail test startup timeout.");
   const env = {
     ...environment,
     DATABASE_URL: `postgresql://bamas_test:${password}@127.0.0.1:${port}/bamas_test`,
     BETTER_AUTH_SECRET: randomBytes(32).toString("hex"),
     BETTER_AUTH_URL: "http://localhost:3002",
-    AUTH_ALLOW_UNVERIFIED_LOCAL: "true",
+    SMTP_HOST: "127.0.0.1",
+    SMTP_PORT: smtpPort,
+    SMTP_SECURE: "false",
+    SMTP_USER: "",
+    SMTP_PASSWORD: "",
+    SMTP_ALLOW_INSECURE_LOCAL: "true",
+    MAIL_FROM: "accounts@bamas.example",
+    MAILPIT_URL: mailURL,
   };
   console.log("Applying migrations to isolated PostgreSQL test database.");
   run("npx", ["prisma", "migrate", "deploy"], env);
   run("npx", ["prisma", "migrate", "deploy"], env);
   run("npx", ["playwright", "test", "--config=playwright.f2.config.ts"], env);
 } finally {
+  if (mailStarted) docker(["stop", mailName], true);
   if (started) docker(["stop", name], true);
   rmSync(dir, { recursive: true, force: true });
 }

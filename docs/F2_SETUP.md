@@ -9,12 +9,35 @@ Prasyarat: Node.js 24 LTS, npm, PostgreSQL 17 (lokal atau container). Untuk tes 
 1. Jalankan `npm ci` (otomatis generate Prisma client).
 2. Salin `.env.example` ke `.env`. Isi `DATABASE_URL` ke database development kosong milik Anda; gunakan password acak. Jangan memakai database production.
 3. Isi `BETTER_AUTH_SECRET` dengan nilai acak minimal 32 byte, misalnya keluaran `openssl rand -hex 32`. Simpan hanya di `.env`, jangan Git/chat/log.
-4. Biarkan `BETTER_AUTH_URL=http://localhost:3000` dan `AUTH_ALLOW_UNVERIFIED_LOCAL=true` hanya untuk pengembangan lokal.
-5. Jalankan `npm run db:migrate`, lalu `npm run dev`. Daftar di `/akun`; akun baru selalu DONOR.
+4. Jalankan kotak surat lokal Mailpit (lihat perintah di bawah); isi variabel SMTP dari `.env.example`. Biarkan `BETTER_AUTH_URL=http://localhost:3000` untuk lokal.
+5. Atur `MAIL_FROM`, host/port dan mode TLS sesuai lingkungan. Semua akun sekarang wajib verifikasi email; flag lama `AUTH_ALLOW_UNVERIFIED_LOCAL` dihapus.
+6. Jalankan `npm run db:migrate`, lalu `npm run dev`. Daftar di `/akun`, buka email verifikasi di kotak surat lokal, klik tautan, lalu login. Akun baru selalu DONOR.
 
 Migrasi tidak mengimpor fixture browser. Database baru tidak memiliki kampanye ACTIVE atau riwayat donasi. Form draft hanya muncul bagi CAMPAIGNER/ADMIN. Untuk pengujian role lokal, operator dapat mengubah field role akun uji melalui `npx prisma studio`; jangan promosikan role melalui browser/API. Workflow pemberian role operasional beserta audit belum tersedia (F3).
 
-Tidak ada verifikasi/reset password lewat email sampai provider email dikonfigurasi. Konfigurasi auth hostname publik sengaja ditolak; jangan menghapus guard untuk deploy. Production deployment tetap membutuhkan review keamanan dan persetujuan pemilik.
+Verifikasi dan reset password sudah diimplementasikan. Konfigurasi SMTP lengkap wajib tersedia; konfigurasi yang tidak aman/kurang menghasilkan 503. Akun lama yang belum diverifikasi harus meminta email baru melalui `/akun/kirim-verifikasi`. Production deployment tetap membutuhkan review keamanan dan persetujuan pemilik.
+
+### Kotak surat lokal
+
+```sh
+docker run --rm -d --name bamas-mailpit -p 127.0.0.1:1025:1025 -p 127.0.0.1:8025:8025 axllent/mailpit@sha256:aef2aacc11f075ec0fb6874275ee4a421e688e11a96ebb296134d1735c7761ce
+```
+
+Buka http://localhost:8025 untuk membaca email uji. SMTP port 1025, tanpa autentikasi/TLS, hanya bila `SMTP_ALLOW_INSECURE_LOCAL=true` dan aplikasi juga localhost. Jangan buka port kotak surat uji ke internet. Stop dengan `docker stop bamas-mailpit`.
+
+### Menghubungkan provider email
+
+- Tentukan penyedia SMTP dan domain pengirim milik pemilik BAMAS; verifikasi domain serta SPF/DKIM (DMARC sesuai kebijakan domain) melalui provider.
+- Simpan `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM` dan `BETTER_AUTH_SECRET` pada secret/environment settings, bukan Git atau chat.
+- Public origin menggunakan `BETTER_AUTH_URL=https://...`, `SMTP_ALLOW_INSECURE_LOCAL=false`. Port 465 biasanya `SMTP_SECURE=true`; port 587 `false` dengan STARTTLS wajib. Sertifikat tidak boleh dilewati.
+- Uji koneksi autentikasi SMTP serta penerimaan inbox/spam, verifikasi, kirim ulang, reset dan logout semua device dengan akun uji yang disetujui. Provider belum dikonfigurasi pada sesi implementasi ini; pengiriman inbox publik belum diverifikasi.
+- Redact query token dan URL reset pada access log/reverse proxy/analytics. Tidak mempublikasikan capture Mailpit. Jangan mengaktifkan debug SMTP.
+
+### Perilaku pemulihan
+
+`/akun/lupa-password` meminta tautan reset, `/akun/reset-password` menerima tautan dari email dan meminta konfirmasi kata sandi. Tautan reset berlaku 15 menit/sekali pakai, session lama dicabut sesudah berhasil. Verifikasi berlaku 60 menit; verifikasi ulang tidak membuat session. Halaman hasil `/akun/verifikasi` mengarahkan kembali ke login. Pesan permintaan email bersifat umum untuk akun ada/tidak ada.
+
+Jika pengiriman gagal, periksa konfigurasi/provider tanpa menyalin credentials ke log. Signup dapat meninggalkan akun belum terverifikasi saat SMTP gagal; gunakan kirim ulang setelah layanan pulih. Email yang diterima server SMTP belum tentu masuk inbox penerima.
 
 ## Pemeriksaan
 
@@ -28,13 +51,13 @@ npm run test:e2e
 npm run test:integration
 ```
 
-Suite integrasi membuat container PostgreSQL sementara dengan credentials acak, menjalankan migrasi dua kali, memakai server lokal port 3002 dan menghapus container sesudahnya. Database development tidak disentuh. Port 3002 harus kosong; jangan menjalankan suite bersamaan. Secret tidak menjadi artifact; trace/screenshot auth dimatikan. Suite F1 memakai port 3001.
+Suite integrasi membuat container PostgreSQL dan Mailpit sementara dengan credentials acak, menjalankan migrasi dua kali, memakai server lokal port 3002 dan menghapus kedua container sesudahnya. Alur verifikasi/reset diuji melalui SMTP nyata ke Mailpit tanpa email eksternal. Database development tidak disentuh. Port 3002 harus kosong; jangan menjalankan suite bersamaan. Secret tidak menjadi artifact; trace/screenshot auth dimatikan. Suite F1 memakai port 3001.
 
 ## API yang tersedia
 
 | Endpoint | Izin / hasil |
 | --- | --- |
-| `/api/auth/*` | Better Auth signup/signin/signout/session; origin sama, rate limit DB |
+| `/api/auth/*` | Better Auth signup/signin/signout/session, send-verification-email, verify-email, request-password-reset, reset-password; rate limit DB |
 | GET `/api/me` | Session aktif, profil dan role sendiri |
 | GET `/api/admin/overview` | ADMIN, jumlah akun/kampanye saja |
 | GET `/api/campaigns?q=&page=` | Publik, ACTIVE saja; 20 per halaman |

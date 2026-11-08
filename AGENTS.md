@@ -3,7 +3,7 @@
 Berlaku untuk seluruh repository. Sumber visual: reference/BAMAS-desain-aplikasi-donasi.html; audit statis F0: docs/AUDIT_BAMAS.md. Jangan mengarang fitur/desain yang tidak tersedia. Laporkan bahan hilang sebagai blocker migrasi visual.
 
 ## Lingkup dan workflow
-- Pemilik telah menyetujui PR-1 sampai PR-5 untuk F1 pada 2026-11-05. Kerjakan berurutan pada branch/PR bertingkat; tanpa merge otomatis. F2 telah diotorisasi pemilik pada 2026-11-07; berhenti sebelum F3. Merge F1 sebelumnya adalah izin khusus; jangan merge PR F2 otomatis.
+- Pemilik telah menyetujui PR-1 sampai PR-5 untuk F1 pada 2026-11-05. Kerjakan berurutan pada branch/PR bertingkat; tanpa merge otomatis. F2 telah diotorisasi pemilik pada 2026-11-07; berhenti sebelum F3. Merge F1 dan PR F2 #7 adalah izin khusus; jangan merge PR lanjutan otomatis. Pelengkap F2 (verifikasi email/reset password/SMTP) diotorisasi pada 2026-11-08.
 - Gunakan feature branch dari repository ini, commit dan PR. Jangan menulis ke main, force push, overwrite pekerjaan pengguna, merge otomatis, atau membuat repository baru.
 - Jalankan pemeriksaan relevan; laporkan PASS, FAIL, NOT RUN beserta alasan. Jangan mengklaim tes yang belum dijalankan.
 - Tidak boleh commit credentials, secrets, data pribadi, atau .env. Jangan deploy production tanpa persetujuan eksplisit.

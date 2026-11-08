@@ -17,4 +17,4 @@ Setiap PR memerlukan review; jangan merge otomatis. PR-1 sampai PR-5 untuk F1 te
 
 Pembayaran nyata dan payout tidak otomatis diizinkan oleh F5. Provider, kebijakan guest, retensi data dan aturan moderasi diputuskan sebelum fase terkait. Bahan visual hilang atau perilaku ambigu menjadi blocker untuk bagian migrasi tersebut; jangan mengganti dengan desain rekaan.
 
-Implementasi F2: lihat [setup](F2_SETUP.md) dan [QA](F2_QA.md). Login saat ini untuk localhost; email delivery dan kesiapan auth publik masih menjadi gate sebelum penggunaan publik. PR F2 tidak di-merge otomatis.
+Implementasi F2: lihat [setup](F2_SETUP.md) dan [QA](F2_QA.md). Verifikasi/reset password dan SMTP sudah diimplementasikan; konfigurasi provider/domain serta uji inbox publik masih menjadi gate operasional sebelum penggunaan publik. PR F2 tidak di-merge otomatis.
