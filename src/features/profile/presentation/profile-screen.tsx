@@ -29,9 +29,11 @@ export function ProfileScreen({
   return (
     <section className="section">
       <h1 className="page-title">Profil</h1>
-      <Link href="/akun" className="button secondary full">
-        Masuk akun F2
-      </Link>
+      {process.env.NEXT_PUBLIC_BAMAS_DEMO_ONLY !== "true" && (
+        <Link href="/akun" className="button secondary full">
+          Masuk akun F2
+        </Link>
+      )}
       <SimulationNotice />
       <div className="profile-card">
         <div className="avatar">AR</div>

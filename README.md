@@ -33,3 +33,6 @@ Lihat [progres F1](docs/F1_PROGRESS.md) dan [laporan QA F1](docs/F1_QA.md). PR d
 
 ## Backend F2
 Lihat [setup dan kontrak API F2](docs/F2_SETUP.md), [ADR autentikasi](docs/adr/0003-f2-database-auth.md), dan [QA F2](docs/F2_QA.md). Login tersedia di `/akun`; akun baru DONOR. Verifikasi email dan reset password tersedia melalui SMTP. Penggunaan publik membutuhkan konfigurasi provider/domain serta pengujian penerimaan email; belum ada deployment. Lihat [QA pelengkap F2](docs/F2_EMAIL_QA.md).
+
+## Preview iPhone
+Untuk preview F1 tanpa layanan backend, lihat [panduan preview iPhone](docs/IPHONE_PREVIEW.md). Aktifkan `NEXT_PUBLIC_BAMAS_DEMO_ONLY=true` saat build dan runtime pada proyek preview terpisah.
