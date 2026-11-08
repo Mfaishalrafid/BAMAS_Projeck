@@ -1381,3 +1381,8 @@ h3 {
 .design-notes > .eyebrow {
   font-weight: 500;
 }
+
+.account-heading {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}

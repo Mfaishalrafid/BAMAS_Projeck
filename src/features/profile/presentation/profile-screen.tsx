@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import type { Campaign } from "@/features/campaigns/domain/campaign";
 import type { Donation } from "@/features/donations/domain/donation";
@@ -28,6 +29,9 @@ export function ProfileScreen({
   return (
     <section className="section">
       <h1 className="page-title">Profil</h1>
+      <Link href="/akun" className="button secondary full">
+        Masuk akun F2
+      </Link>
       <SimulationNotice />
       <div className="profile-card">
         <div className="avatar">AR</div>
